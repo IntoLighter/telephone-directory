@@ -14,5 +14,12 @@ public class TelephoneDirectoryDbContext : DbContext
     {
     }
 
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        builder.Entity<Contact>()
+            .HasIndex(c => c.PhoneNumber)
+            .IsUnique();
+    }
+
     public DbSet<telephone_directory.Models.Contact> Contact { get; set; }
 }
