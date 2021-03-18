@@ -20,8 +20,6 @@
   <ItemGroup>
     <Folder Include="Data\">
     </Folder>
-    <Folder Include="Views\Contact\">
-    </Folder>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Migrations\20210318065233_InitialCreate.Designer.cs">
