@@ -50,9 +50,6 @@
                 </div>
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
-            <button type="button" class="form-group" id="add-number-button">
-                +
-            </button>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -66,19 +63,4 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-    <script type="text/javascript" src="@Url.Content("/Users/a/VsProjects/telephone-directory/telephone-directory/wwwroot/lib/jquery/dist/jquery.min.js")"></script>
-
-    <script type="text/javascript">$(document).on('click', '#add-number-button', function () {
-            $('#add-number-button').before(
-                `<div class="form-group phone-group">
-                                <label asp-for= "PhoneNumber" class= "control-label" ></label>
-                                <div class="form-control" style="display:flex;">
-                                    <span>+7</span>
-                                    <input asp-for="PhoneNumber" class="form-control phone-control"/>
-                                </div>
-                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                            </div>`
-            )
-        })</script>
 }
