@@ -1,0 +1,84 @@
+@model telephone_directory.Models.Contact
+
+@{ ViewData["Title"] = "Create"; }
+
+<style>
+    .phone-control {
+        height: auto;
+        padding: 0;
+        border: none;
+    }
+
+        .phone-control:focus, :hover {
+            box-shadow: none;
+        }
+</style>
+
+<h1>Create</h1>
+
+<h4>Contact</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MiddleName" class="control-label"></label>
+                <input asp-for="MiddleName" class="form-control" />
+                <span asp-validation-for="MiddleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthDate" class="control-label"></label>
+                <input asp-for="BirthDate" class="form-control" />
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group phone-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <div class="form-control" style="display:flex;">
+                    <span>+7</span>
+                    <input asp-for="PhoneNumber" class="form-control phone-control" />
+                </div>
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <button type="button" class="form-group" id="add-number-button">
+                +
+            </button>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript" src="@Url.Content("/Users/a/VsProjects/telephone-directory/telephone-directory/wwwroot/lib/jquery/dist/jquery.min.js")"></script>
+
+    <script type="text/javascript">$(document).on('click', '#add-number-button', function () {
+            $('#add-number-button').before(
+                `<div class="form-group phone-group">
+                                <label asp-for= "PhoneNumber" class= "control-label" ></label>
+                                <div class="form-control" style="display:flex;">
+                                    <span>+7</span>
+                                    <input asp-for="PhoneNumber" class="form-control phone-control"/>
+                                </div>
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>`
+            )
+        })</script>
+}
