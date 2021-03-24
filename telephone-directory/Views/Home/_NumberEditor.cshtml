@@ -1,0 +1,16 @@
+﻿@model PhoneNumber
+
+<div class="form-group editor-row">
+    <label asp-for="Number" class="control-label"></label>
+    <div class="form-control" style="display:flex;">
+        <span>+7</span>
+        <input asp-for="Number" class="form-control phone-control"/>
+    </div>
+    <span asp-validation-for="Number" class="text-danger"></span>
+    @{
+        if (!(bool) ViewData["isDefault"])
+        {
+            <a class="deleteRow">delete</a>
+        }
+    }
+</div>

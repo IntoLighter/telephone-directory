@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace telephone_directory.Models
 {
-    public class Contact
+    public record Contact
     {
         public long Id { get; set; }
 
@@ -19,8 +18,6 @@ namespace telephone_directory.Models
         [RegularExpression("^[1-3]?\\d.[0-1]\\d.[1-2]\\d{3}$")]
         public string BirthDate { get; set; }
 
-        [Required]
-        [RegularExpression("^[0-9]{10}$")]
-        public string PhoneNumber { get; set; }
+        public List<PhoneNumber> PhoneNumbers { get; set; } = new();
     }
 }

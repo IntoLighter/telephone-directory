@@ -1,16 +1,13 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-
+using telephone_directory.Data;
 using telephone_directory.Models;
 
-namespace telephone_directory
+namespace telephone_directory.Controllers
 {
     public class HomeController : Controller
     {
@@ -21,13 +18,11 @@ namespace telephone_directory
             _context = context;
         }
 
-        // GET: Contact
         public async Task<IActionResult> Index()
         {
             return View(await _context.Contact.ToListAsync());
         }
 
-        // GET: Contact/Details/5
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
@@ -45,16 +40,14 @@ namespace telephone_directory
             return View(contact);
         }
 
-        // GET: Contact/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Contact/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,MiddleName,BirthDate,PhoneNumber")] Contact contact)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,MiddleName,BirthDate")] Contact contact)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +58,6 @@ namespace telephone_directory
             return View(contact);
         }
 
-        // GET: Contact/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -81,7 +73,6 @@ namespace telephone_directory
             return View(contact);
         }
 
-        // POST: Contact/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("Id,FirstName,LastName,MiddleName,BirthDate,PhoneNumber")] Contact contact)
@@ -104,17 +95,14 @@ namespace telephone_directory
                     {
                         return NotFound();
                     }
-                    else
-                    {
-                        throw;
-                    }
+
+                    throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
             return View(contact);
         }
 
-        // GET: Contact/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -132,7 +120,6 @@ namespace telephone_directory
             return View(contact);
         }
 
-        // POST: Contact/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
@@ -141,6 +128,11 @@ namespace telephone_directory
             _context.Contact.Remove(contact);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+        
+        public IActionResult BlackPhoneNumber()
+        {
+            return PartialView("_NumberEditor", new PhoneNumber());
         }
 
         private bool ContactExists(long id)
